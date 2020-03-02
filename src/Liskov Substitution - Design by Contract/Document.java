@@ -45,16 +45,13 @@ class Document {
 	 * 
 	 * @param pos Position of the characters to be returned
 	 * @param count Number of characters to be returned
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
+	 *
+     * @pre 0 <= pos <= length()
+     * @pre count > 0
+	 * @pre count + pos <= length()
+     *
+	 * @post The return string.length() == count
+     * @post The return string equals the substring of the document from pos to pos + count
 	 */
 	String read(int pos, int count) { return null; }
 	
@@ -64,16 +61,13 @@ class Document {
 	 * 
 	 * @param pos Position at which the character sequence should be inserted
 	 * @param s Character sequence to be inserted
+	 *
+     * @pre 0 <= pos <= length()
+     * @pre s.length() > 0
+	 * @pre s != null
 	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
+	 * @post The old document length + s.length() = new document length
+	 * @post A read after an insert will be the old document with the inserted string s at position pos
 	 */
 	void insert(int pos, String s) {}
 
@@ -83,17 +77,15 @@ class Document {
 	 * 
 	 * @param pos Starting position of the sequence that is being deleted 
 	 * @param count Number of characters to be deleted
+	 *
+     * @pre pos + count <= length()
+     * @pre pos >= 0
+     * @pre count > 0
 	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 */
+	 * @post The new document length = old document length - count
+     * @post A read after an delete will be the old document minus the inserted chars at position pos with length count
+
+     */
 	void delete(int pos, int count) {}
 
     
@@ -124,16 +116,11 @@ class Document {
      * position, and advances the cursor forward one position
 	 * 
 	 * @param c Character to be inserted
+	 *
+     * @pre c != null
 	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
+	 * @post new cursor pos = old cursor + 1
+	 * @post read would show the addition of the char c where the cursor was
 	 */
 	void insert(char c) {}
 	
@@ -141,47 +128,35 @@ class Document {
 	/**
 	 * Deletes the character at the current cursor position
 	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
+	 * @pre length() > 0
+     *
+     * @post new length() = old length() - 1
+     * @post read would show the old document without the character at the cursor's position
 	 */
 	void delete() {}
-	
-    
+
+
 	/**
 	 * Moves the cursor backward one position, and deletes the character at the new cursor position
 	 *
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 */
+     * @pre length() > 0
+     * @pre cursor() != 0
+     * @pre cursor() > length()
+     *
+     * @post new length() = old length() - 1
+     * @post read would show the old document without the character at the cursor's previous position
+     */
 	void deletePrevious() {}
 
     
 	/**
 	 * Deletes the entire contents of the document and resets it to an empty state
 	 *
+	 * @pre none
 	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
+	 * @post length() == 0
+     * @post A read would show an empty document
+     * @post cursor() == 0
 	 */
 	void clear() {}
 }
