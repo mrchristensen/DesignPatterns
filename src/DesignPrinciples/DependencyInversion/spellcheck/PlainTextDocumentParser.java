@@ -7,9 +7,9 @@ import java.util.Scanner;
 import java.util.regex.Pattern;
 
 
-public class WordExtractor {
+public class PlainTextDocumentParser implements DocumentParser {
 
-	public List<String> extract(String content) {
+	public List<String> parse(String content) {
 
 		content = content.toLowerCase();
 		

@@ -2,7 +2,6 @@
 package DesignPrinciples.DependencyInversion.spellcheck;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.List;
 import java.util.SortedMap;
 import java.util.TreeMap;
@@ -10,21 +9,28 @@ import java.util.TreeMap;
 
 public class SpellingChecker {
 
-	public SortedMap<String, Integer> check(URL url) throws IOException {
+    private final DocumentSource documentSource;
+    private final DocumentParser documentParser;
+    private final Dictionary dictionary;
+
+    public SpellingChecker(DocumentSource documentSource, DocumentParser documentParser, Dictionary dictionary) {
+        this.documentSource = documentSource;
+        this.documentParser = documentParser;
+        this.dictionary = dictionary;
+    }
+
+    public SortedMap<String, Integer> check(String uri) throws IOException {
 
 		// download the document content
 		//
-		URLFetcher fetcher = new URLFetcher();
-		String content = fetcher.fetch(url);
+		String content = documentSource.getContent(uri);
 
 		// extract words from the content
 		//
-		WordExtractor extractor = new WordExtractor();
-		List<String> words = extractor.extract(content);
+		List<String> words = documentParser.parse(content);
 
 		// find spelling mistakes
 		//
-		Dictionary dictionary = new Dictionary("src/DesignPrinciples/DependencyInversion/dict.txt");
 		SortedMap<String, Integer> mistakes = new TreeMap<>();
 
         for (String word : words) {
