@@ -1,4 +1,6 @@
-package DesignPatterns.AbstractFactory.spellcheck;
+package DesignPatterns.AbstractFactory.spellcheck.Factories;
+
+import DesignPatterns.AbstractFactory.spellcheck.Dictionary;
 
 import java.io.IOException;
 

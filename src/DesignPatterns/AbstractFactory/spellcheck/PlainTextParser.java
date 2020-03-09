@@ -7,7 +7,7 @@ import java.util.Scanner;
 import java.util.regex.Pattern;
 
 
-public class PlainTextDocumentParser implements DocumentParser {
+public class PlainTextParser implements Parser {
 
 	public List<String> parse(String content) {
 

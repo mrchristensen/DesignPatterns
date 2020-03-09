@@ -1,6 +1,10 @@
 
 package DesignPatterns.AbstractFactory.spellcheck;
 
+import DesignPatterns.AbstractFactory.spellcheck.Factories.PlainTextDocumentParserFactory;
+import DesignPatterns.AbstractFactory.spellcheck.Factories.TextFileDictionaryFactory;
+import DesignPatterns.AbstractFactory.spellcheck.Factories.URLDocumentSourceFactory;
+
 import java.io.IOException;
 import java.util.SortedMap;
 
@@ -12,7 +16,7 @@ public class Main {
 		try {
 			String content = args[0];
 			//pass in concrete factories
-			SpellingChecker checker = new SpellingChecker(new URLDocumentSource(), new PlainTextDocumentParser(), new DictionaryFactory());
+			SpellingChecker checker = new SpellingChecker(new URLDocumentSourceFactory(), new PlainTextDocumentParserFactory(), new TextFileDictionaryFactory());
 			SortedMap<String, Integer> mistakes = checker.check(content);
 			System.out.println("Mistakes:\n" + mistakes);
 			System.out.println("Test: make sure output matches: \n" + "{be=1, doesn=1, funtion=1, t=2}"); //Matt said that we can do it this way
