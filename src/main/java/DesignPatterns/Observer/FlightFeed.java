@@ -1,9 +1,14 @@
 package DesignPatterns.Observer;
 
-import java.io.*;
-import java.net.*;
-import java.util.*;
 import com.google.gson.*;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FlightFeed extends Subject {
 	
