@@ -1,0 +1,54 @@
+1. What design principles does this program violate?
+Single Responsibility by writing in the logic - and thus need to be decoupled
+2. Refactor the program to improve its design.
+
+CsvWriter.java
+
+public class CsvWriter {
+	PrintWriter writer;
+
+	public CsvWriter() {
+	}
+
+	public void setPrinter(/*some args to actually select how you want to output*/){
+	     writer = new PrintWriter(System.out);
+	}
+
+	public void write(String[][] lines) {
+		for (int i = 0; i < lines.length; i++)
+			writeLine(lines[i]);
+	}
+
+	private void writeLine(String[] fields) {
+		if (fields.length == 0)
+			writer.write("\n");
+		else {
+			writeField(fields[0]);
+
+			for (int i = 1; i < fields.length; i++) {
+				writer.write(",");
+				writeField(fields[i]);
+			}
+			writer.write("/n");
+		}
+	}
+
+	private void writeField(String field) {
+		if (field.indexOf(',') != -1 || field.indexOf('\"') != -1)
+			writeQuoted(field);
+		else
+			writer.write(field);
+	}
+
+	private void writeQuoted(String field) {
+		writer.write('\"');
+		for (int i = 0; i < field.length(); i++) {
+			char c = field.charAt(i);
+			if (c == '\"')
+				writer.write.print("\"\"");
+			else
+				writer.write.print(c);
+		}
+		writer.write('\"');
+	}
+}
