@@ -1,4 +1,4 @@
-package DesignPrinciples.DependencyInjection.spellcheck;
+package DesignPatterns.DependencyInjection.spellcheck.Source;
 
 import java.io.IOException;
 

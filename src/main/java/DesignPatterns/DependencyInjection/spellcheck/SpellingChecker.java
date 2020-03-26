@@ -1,6 +1,10 @@
 
-package DesignPrinciples.DependencyInjection.spellcheck;
+package DesignPatterns.DependencyInjection.spellcheck;
 
+import DesignPatterns.DependencyInjection.spellcheck.Dictionary.Dictionary;
+import DesignPatterns.DependencyInjection.spellcheck.Parser.DocumentParser;
+import DesignPatterns.DependencyInjection.spellcheck.Source.DocumentSource;
+import com.google.inject.Inject;
 import java.io.IOException;
 import java.util.List;
 import java.util.SortedMap;
@@ -13,6 +17,7 @@ public class SpellingChecker {
     private final DocumentParser documentParser;
     private final Dictionary dictionary;
 
+    @Inject
     public SpellingChecker(DocumentSource documentSource, DocumentParser documentParser, Dictionary dictionary) {
         this.documentSource = documentSource;
         this.documentParser = documentParser;
@@ -46,5 +51,9 @@ public class SpellingChecker {
 
 		return mistakes;
 	}
+
+    public void setDictionary(String dictionary) throws IOException {
+        this.dictionary.setDictionary(dictionary);
+    }
 }
 

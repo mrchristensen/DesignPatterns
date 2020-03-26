@@ -1,5 +1,5 @@
 
-package DesignPrinciples.DependencyInjection.spellcheck;
+package DesignPatterns.DependencyInjection.spellcheck.Dictionary;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,7 +12,11 @@ public class TextFileDictionary implements Dictionary {
 
 	private Set<String> words;
 
-	public TextFileDictionary(String fileName) throws IOException {
+	public TextFileDictionary() {
+
+	}
+
+	public void setDictionary(String fileName) throws IOException {
         try (Scanner scanner = new Scanner(new File(fileName))) {
             words = new TreeSet<>();
             while (scanner.hasNextLine()) {
@@ -20,7 +24,7 @@ public class TextFileDictionary implements Dictionary {
                 words.add(word);
             }
         }
-	}
+    }
 
 	public boolean isValidWord(String word) {
 		return words.contains(word);
