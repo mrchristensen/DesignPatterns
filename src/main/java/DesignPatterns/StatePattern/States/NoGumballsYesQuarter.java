@@ -2,7 +2,7 @@ package DesignPatterns.StatePattern.States;
 
 import DesignPatterns.StatePattern.GumballMachine;
 
-public class NoGumballsYesQuarter implements State {
+public class NoGumballsYesQuarter implements GumballState {
     @Override
     public void turnHandle(GumballMachine gumballMachine) {
         System.out.println("You turned the handle but didn't get a gumball - the machine is empty!");

@@ -1,11 +1,11 @@
 package DesignPatterns.StatePattern;
 
 import DesignPatterns.StatePattern.States.NoGumballsNoQuarter;
-import DesignPatterns.StatePattern.States.State;
+import DesignPatterns.StatePattern.States.GumballState;
 
 public class GumballMachine {
     //Track money made, how many gumballs it contains, if there's a quarter in the slot.
-    State currentState;
+    GumballState currentState;
     double profit;
     int gumballs;
     boolean quarterInserted;
@@ -42,7 +42,7 @@ public class GumballMachine {
                 "\nPress:\n1 to add gumballs\n2 to insert a quarter\n3 to remove quarter\n4 to turn handle\n";
     }
 
-    public void setCurrentState(State state){
+    public void setCurrentState(GumballState state){
         currentState = state;
     }
 

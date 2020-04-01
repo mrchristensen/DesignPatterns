@@ -2,7 +2,7 @@ package DesignPatterns.StatePattern.States;
 
 import DesignPatterns.StatePattern.GumballMachine;
 
-public class YesGumballsYesQuarter implements State {
+public class YesGumballsYesQuarter implements GumballState {
     @Override
     public void turnHandle(GumballMachine gumballMachine) {
         System.out.println("You turned the handle and got a gumball!");

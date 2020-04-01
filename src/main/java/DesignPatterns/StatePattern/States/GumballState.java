@@ -2,7 +2,7 @@ package DesignPatterns.StatePattern.States;
 
 import DesignPatterns.StatePattern.GumballMachine;
 
-public interface State {
+public interface GumballState {
     void turnHandle(GumballMachine gumballMachine);
 
     void removeQuarter(GumballMachine gumballMachine);
