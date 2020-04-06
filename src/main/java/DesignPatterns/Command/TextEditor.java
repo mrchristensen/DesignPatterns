@@ -1,13 +1,17 @@
 package DesignPatterns.Command;
 
+import DesignPatterns.Command.Commands.*;
+
 import java.util.Scanner;
 
 class TextEditor {
 
     private IDocument _document;
+    private UndoRedoManager undoRedoManager;
 
     TextEditor(IDocument document) {
         _document = document;
+        undoRedoManager = new UndoRedoManager();
     }
 
     void run() {
@@ -39,13 +43,23 @@ class TextEditor {
                         open();
                         break;
                     case 7:
-                        _document.clear();
+                        undoRedoManager.execute(new StartCommand(_document));
                         break;
                     case 8:
-                        System.out.println("Undo");
+                        if(undoRedoManager.canUndo()) {
+                            undoRedoManager.undo();
+                        }
+                        else {
+                            System.out.println("Cannot undo");
+                        }
                         break;
                     case 9:
-                        System.out.println("Redo");
+                        if(undoRedoManager.canRedo()) {
+                            undoRedoManager.redo();
+                        }
+                        else {
+                            System.out.println("Cannot redo");
+                        }
                         break;
                     case 10:
                         return;
@@ -82,7 +96,7 @@ class TextEditor {
         if (insertionIndex != -1) {
             System.out.print("Sequence to insert: ");
             String sequenceInput = scanner.next();
-            _document.insert(insertionIndex, sequenceInput);
+            undoRedoManager.execute(new InsertCommand(insertionIndex, sequenceInput, _document));
         }
     }
 
@@ -97,9 +111,7 @@ class TextEditor {
             String deletionDistanceInput = scanner.next();
             int deletionDistance = validateNumberInput(deletionDistanceInput);
             if (deletionDistance != -1) {
-                if (_document.delete(deletionIndex, deletionDistance) == null) {
-                    System.out.println("Deletion unsuccessful");
-                }
+                undoRedoManager.execute(new DeleteCommand(deletionIndex, deletionDistance,_document));
             }
         }
     }
@@ -117,8 +129,7 @@ class TextEditor {
             if (replaceDistance != -1) {
                 System.out.print("Replacement string: ");
                 String replacementString = scanner.next();
-                _document.delete(replaceIndex, replaceDistance);
-                _document.insert(replaceIndex, replacementString);
+                undoRedoManager.execute(new ReplaceCommand(replaceIndex, replaceDistance, replacementString, _document));
             }
         }
     }
@@ -136,7 +147,7 @@ class TextEditor {
 
         System.out.print("Name of file to open: ");
         String openFileName = scanner.next();
-        _document.open(openFileName);
+        undoRedoManager.execute(new OpenCommand(openFileName, _document));
     }
 
     private int validateNumberInput(String input) {
