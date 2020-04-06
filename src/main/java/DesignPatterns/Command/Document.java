@@ -56,7 +56,7 @@ class Document implements IDocument {
     public void open(String fileName) {
         File file = new File(fileName);
         try (Scanner scanner = new Scanner(file)) {
-            _sequence.clear();
+            clear();
             while (scanner.hasNext()) {
                 String next = scanner.next();
                 _sequence.insert(_cursor, next);
